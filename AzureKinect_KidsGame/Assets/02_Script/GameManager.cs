@@ -19,16 +19,17 @@ public class GameManager : MonoBehaviour
     public Slider timeSlider;
     public GameObject bestScoreUI;
     public Button returnToMainButton;
+    //public AudioClip scoreClip; // 득점 사운드 클립
+    //private AudioSource audioSource;
+
     private float totalTime = 91f;
     private float timer;
     private bool timerStopped = false;
 
     public bool IsGameOver { get { return isGameOver; } }
 
-
     private void Awake()
     {
-
         if (Instance == null)
         {
             Instance = this;
@@ -46,7 +47,7 @@ public class GameManager : MonoBehaviour
         timeSlider.maxValue = totalTime;
         bestScoreUI.SetActive(false);
         returnToMainButton.gameObject.SetActive(false);
-        //StartCoroutine(StartCountdown());
+        //audioSource = GetComponent<AudioSource>(); // AudioSource 컴포넌트 가져오기
     }
 
     void Update()
@@ -64,7 +65,7 @@ public class GameManager : MonoBehaviour
         {
             timer = 0;
             timerStopped = true;
-            EndGame();
+            EndGame(); // 타이머가 끝나면 게임 종료
         }
     }
 
@@ -88,6 +89,8 @@ public class GameManager : MonoBehaviour
         {
             score += value;
             UpdateScoreText();
+            // 득점 사운드 재생
+            //audioSource.PlayOneShot(scoreClip);
         }
     }
 
@@ -96,9 +99,10 @@ public class GameManager : MonoBehaviour
         if (!isGameOver)
         {
             isGameOver = true;
-            Time.timeScale = 0; 
-            bestScoreUI.SetActive(true); 
+            Time.timeScale = 0; // 게임 일시정지
+            bestScoreUI.SetActive(true); // 베스트 스코어 UI 활성화
             returnToMainButton.gameObject.SetActive(true);
+            //Debug.Log("Game Over");
         }
     }
 
