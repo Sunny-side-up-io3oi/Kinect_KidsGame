@@ -198,9 +198,11 @@ GameObject:
   - component: {fileID: 6059905230216099785}
   - component: {fileID: 214263376001510835}
   - component: {fileID: 2774014481731938041}
+  - component: {fileID: -5661797307811890810}
+  - component: {fileID: 85260340789250595}
   m_Layer: 0
   m_Name: 'FishB '
-  m_TagString: Untagged
+  m_TagString: FishB
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -270,6 +272,41 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &-5661797307811890810
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6868775718403157363}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &85260340789250595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6868775718403157363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70ba8cb1b23941f418019c490eadbd9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 50
+  speed: 5
 --- !u!1 &6946508658279500315
 GameObject:
   m_ObjectHideFlags: 0

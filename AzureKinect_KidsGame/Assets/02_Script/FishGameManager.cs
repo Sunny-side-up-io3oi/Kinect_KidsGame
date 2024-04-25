@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 
 public class FishGameManager : MonoBehaviour
-{
+{/*
     public TMP_Text scoreText;
     public TMP_Text scoreText2;
     public TMP_Text scoreText3;
@@ -50,5 +50,5 @@ public class FishGameManager : MonoBehaviour
         scoreText.text = "점수: " + score.ToString();
         scoreText2.text = "점수: " + score.ToString();
         scoreText3.text = "점수: " + score.ToString();
-    }
+    }*/
 }

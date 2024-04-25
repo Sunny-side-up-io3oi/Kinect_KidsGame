@@ -1,16 +1,43 @@
+using System.Diagnostics;
 using UnityEngine;
 
 public class Fish : MonoBehaviour
 {
-    public int score = 1; // 물고기의 점수
+    public int score;
+    public float speed; 
 
-    private void OnTriggerEnter(Collider other)
+    private Rigidbody rb;
+
+    private void Start()
     {
-        if (other.CompareTag("Player"))
+        rb = GetComponent<Rigidbody>();
+        SetSpeed();
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.CompareTag("Player"))
         {
-            // 물고기가 플레이어와 충돌했을 때 점수 증가 및 물고기 제거
-            GameManager.Instance.AddScore(score);
+            GameManager gameManager = FindObjectOfType<GameManager>();
+            if (gameManager != null)
+            {
+                int scoreToAdd = 0;
+                if (gameObject.CompareTag("FishA"))
+                    scoreToAdd = 20;
+                else if (gameObject.CompareTag("FishB"))
+                    scoreToAdd = 50;
+                else if (gameObject.CompareTag("FishC"))
+                    scoreToAdd = 100;
+
+                gameManager.AddScore(scoreToAdd);
+            }
+
             Destroy(gameObject);
         }
+    }
+    private void SetSpeed()
+    {
+        
+        rb.velocity = new Vector3(0f, -speed, 0f);
     }
 }
