@@ -99,8 +99,8 @@ public class GameManager : MonoBehaviour
         if (!isGameOver)
         {
             isGameOver = true;
-            Time.timeScale = 0; // 게임 일시정지
-            bestScoreUI.SetActive(true); // 베스트 스코어 UI 활성화
+            Time.timeScale = 0; 
+            bestScoreUI.SetActive(true); 
             returnToMainButton.gameObject.SetActive(true);
             //Debug.Log("Game Over");
         }
@@ -110,6 +110,16 @@ public class GameManager : MonoBehaviour
     {
         scoreText.text = "Score: " + score.ToString();
         scoreLText.text = "Score: " + score.ToString();
-        bestscoreText.text = "Score: " + score.ToString();
+        bestscoreText.text = " " + score.ToString();
+    }
+
+    public AudioSource scoreSound;
+
+    public void PlayScoreSound()
+    {
+        if (scoreSound != null && !scoreSound.isPlaying)
+        {
+            scoreSound.Play();
+        }
     }
 }

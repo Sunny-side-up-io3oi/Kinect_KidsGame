@@ -1,10 +1,9 @@
-using System.Diagnostics;
 using UnityEngine;
 
 public class Fish : MonoBehaviour
 {
     public int score;
-    public float speed; 
+    public float speed;
 
     private Rigidbody rb;
 
@@ -30,14 +29,15 @@ public class Fish : MonoBehaviour
                     scoreToAdd = 100;
 
                 gameManager.AddScore(scoreToAdd);
+                gameManager.PlayScoreSound(); 
             }
 
             Destroy(gameObject);
         }
     }
+
     private void SetSpeed()
     {
-        
         rb.velocity = new Vector3(0f, -speed, 0f);
     }
 }
