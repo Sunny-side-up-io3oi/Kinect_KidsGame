@@ -578,6 +578,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 100
   speed: 7
+  scoreParticlePrefab: {fileID: 3223031359271505891, guid: 155410a7086d1d34ca48c448dfc33156,
+    type: 3}
 --- !u!1 &2508133955728661594
 GameObject:
   m_ObjectHideFlags: 0

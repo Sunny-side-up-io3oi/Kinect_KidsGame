@@ -4,6 +4,7 @@ public class Fish : MonoBehaviour
 {
     public int score;
     public float speed;
+    public GameObject scoreParticlePrefab;
 
     private Rigidbody rb;
 
@@ -29,7 +30,12 @@ public class Fish : MonoBehaviour
                     scoreToAdd = 100;
 
                 gameManager.AddScore(scoreToAdd);
-                gameManager.PlayScoreSound(); 
+                gameManager.PlayScoreSound();
+
+                if (scoreParticlePrefab != null)
+                {
+                    Instantiate(scoreParticlePrefab, transform.position, Quaternion.identity);
+                }
             }
 
             Destroy(gameObject);

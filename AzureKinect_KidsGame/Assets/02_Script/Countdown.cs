@@ -7,12 +7,12 @@ public class Countdown : MonoBehaviour
 {
     public TMP_Text countdownText;
     public Image countdownImage;
-    public AudioSource countdownAudio; 
+    public AudioSource countdownAudio;
 
-    //public AudioClip countThreeSound;
-    //public AudioClip countTwoSound; 
-    //public AudioClip countOneSound; 
-    //public AudioClip goSound; 
+    public AudioClip countThreeSound;
+    public AudioClip countTwoSound;
+    public AudioClip countOneSound;
+    public AudioClip goSound;
 
     private float startTime;
 
@@ -28,21 +28,25 @@ public class Countdown : MonoBehaviour
     private IEnumerator StartGame()
     {
         countdownText.text = "3";
-        //countdownAudio.PlayOneShot(countThreeSound);
+        if (countdownAudio != null && countThreeSound != null)
+            countdownAudio.PlayOneShot(countThreeSound);
         countdownImage.gameObject.SetActive(true);
         startTime = Time.realtimeSinceStartup;
         yield return new WaitForSecondsRealtime(1);
 
         countdownText.text = "2";
-        //countdownAudio.PlayOneShot(countTwoSound); 
+        if (countdownAudio != null && countTwoSound != null)
+            countdownAudio.PlayOneShot(countTwoSound);
         yield return new WaitForSecondsRealtime(1);
 
         countdownText.text = "1";
-        //countdownAudio.PlayOneShot(countOneSound); 
+        if (countdownAudio != null && countOneSound != null)
+            countdownAudio.PlayOneShot(countOneSound);
         yield return new WaitForSecondsRealtime(1);
 
         countdownText.text = "GO!";
-        //countdownAudio.PlayOneShot(goSound); 
+        if (countdownAudio != null && goSound != null)
+            countdownAudio.PlayOneShot(goSound);
         yield return new WaitForSecondsRealtime(1);
 
         countdownText.gameObject.SetActive(false);
