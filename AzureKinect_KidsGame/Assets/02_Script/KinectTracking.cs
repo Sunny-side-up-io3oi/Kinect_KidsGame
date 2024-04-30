@@ -3,7 +3,7 @@ using UnityEngine;
 using Windows.Kinect;
 
 public class KinectSpineBaseTracking : MonoBehaviour
-{
+{ 
     private KinectSensor kinectSensor;
     private BodyFrameReader bodyFrameReader;
     private Body[] bodies;
