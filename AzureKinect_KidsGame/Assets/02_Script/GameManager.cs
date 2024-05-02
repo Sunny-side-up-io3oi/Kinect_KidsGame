@@ -8,14 +8,14 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI scoreLText;
+    //public TextMeshProUGUI scoreLText;
     public TextMeshProUGUI bestscoreText;
     public int score { get; private set; }
-    public int scoreL { get; private set; }
+    //public int scoreL { get; private set; }
     public int bestscore { get; private set; }
     private bool isGameOver = false;
     public TMP_Text timerTextR;
-    public TMP_Text timerTextL;
+    //public TMP_Text timerTextL;
     public Slider timeSlider;
     public GameObject bestScoreUI;
     public Button returnToMainButton;
@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
         int seconds = Mathf.FloorToInt(timer % 60);
 
         timerTextR.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-        timerTextL.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        //timerTextL.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     void UpdateSliderValue()
@@ -108,8 +108,8 @@ public class GameManager : MonoBehaviour
 
     private void UpdateScoreText()
     {
-        scoreText.text = "Score: " + score.ToString();
-        scoreLText.text = "Score: " + score.ToString();
+        scoreText.text = " " + score.ToString();
+        //scoreLText.text = "Score: " + score.ToString();
         bestscoreText.text = " " + score.ToString();
     }
 

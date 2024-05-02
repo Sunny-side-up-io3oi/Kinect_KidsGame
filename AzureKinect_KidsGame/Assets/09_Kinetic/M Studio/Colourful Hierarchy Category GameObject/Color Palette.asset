@@ -15,22 +15,22 @@ MonoBehaviour:
   colorDesigns:
   - keyChar: //
     textColor: {r: 1, g: 1, b: 1, a: 1}
-    backgroundColor: {r: 1, g: 0.6565793, b: 0, a: 1}
+    backgroundColor: {r: 0, g: 0.6415094, b: 0.1382039, a: 1}
     textAlignment: 4
     fontStyle: 3
   - keyChar: ///
     textColor: {r: 1, g: 1, b: 1, a: 1}
-    backgroundColor: {r: 0, g: 0.6152477, b: 1, a: 1}
+    backgroundColor: {r: 1, g: 0.40254867, b: 0, a: 1}
     textAlignment: 4
     fontStyle: 1
   - keyChar: '#'
-    textColor: {r: 1, g: 1, b: 1, a: 1}
-    backgroundColor: {r: 1, g: 0.040611777, b: 0, a: 1}
+    textColor: {r: 0, g: 0, b: 0, a: 1}
+    backgroundColor: {r: 1, g: 0.96428573, b: 0, a: 1}
     textAlignment: 4
     fontStyle: 1
   - keyChar: '@'
     textColor: {r: 1, g: 1, b: 1, a: 1}
-    backgroundColor: {r: 0.8207547, g: 0.6350863, b: 0, a: 1}
+    backgroundColor: {r: 0.81960785, g: 0.13094828, b: 0, a: 1}
     textAlignment: 4
     fontStyle: 1
   - keyChar: $
