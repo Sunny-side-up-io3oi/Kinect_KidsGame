@@ -1,0 +1,36 @@
+Schooling 9 Coral Fish
+
+This Fish Pack will help you make your underwater world more realistic.
+The pack contains 9 tropical fish.
+Each fish has an animation loop 50 sec (duration 1500 frames , 30fps).
+Eeach fish has 3 textures: Albedo, Metallic, Normal
+
+The package contains the following fish:
+1 Clownfish
+2 Double-Saddle
+3 Powder Blue Tang
+4 Yellow Tang
+5 Bicolor Angelfish
+6 Threadfin
+7 Yellow Longnose
+8 Copperband
+9 Flame Angelfish
+
+
+
+Number of textures: 27 (each fish has 3 textures)
+Texture dimensions: 1024x1024 px
+Polygon count of Clownfish:         Tris:5478, Verts:2295
+Polygon count of Double-Saddle:     Tris:734,  Verts:385
+Polygon count of Powder Blue Tang:  Tris:1160, Verts:597
+Polygon count of Yellow Tang:       Tris:998,  Verts:501
+Polygon count of Bicolor Angelfish: Tris:2642, Verts:1365
+Polygon count of Threadfin          Tris:858,  Verts:447
+Polygon count of Yellow Longnose    Tris:1770, Verts:903
+Polygon count of Copperband         Tris:2118, Verts:1094
+Polygon count of Flame Angelfish    Tris:2558, Verts:1302
+Number of meshes/prefabs: 2
+Animation count: 1
+UV mapping: Yes
+LOD information (count, number of levels): no
+Types of materials and texture maps (e.g., PBR): Shader Standart. Albedo, Metallic, Normal map
