@@ -3,8 +3,8 @@ using UnityEngine;
 public class FishSpawner : MonoBehaviour
 {
     public GameObject[] fishPrefabs;
-    public float minSpawnInterval = 0.5f; 
-    public float maxSpawnInterval = 2f; 
+    public float minSpawnInterval = 2f; 
+    public float maxSpawnInterval = 5f; 
 
     private void Start()
     {

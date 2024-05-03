@@ -4,7 +4,9 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f; 
 
-    private Rigidbody rb; 
+    private Rigidbody rb;
+
+    
 
     private void Start()
     {
@@ -32,4 +34,5 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+    
 }

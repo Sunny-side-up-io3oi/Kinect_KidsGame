@@ -28,6 +28,10 @@ public class Fish : MonoBehaviour
                     scoreToAdd = 50;
                 else if (gameObject.CompareTag("FishC"))
                     scoreToAdd = 100;
+                else if (gameObject.CompareTag("FishD"))
+                    scoreToAdd = 200;
+                else if (gameObject.CompareTag("FishE"))
+                    scoreToAdd = 300;
 
                 gameManager.AddScore(scoreToAdd);
                 gameManager.PlayScoreSound();

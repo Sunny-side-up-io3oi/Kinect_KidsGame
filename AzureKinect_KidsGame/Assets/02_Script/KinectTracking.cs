@@ -9,7 +9,7 @@ public class KinectSpineBaseTracking : MonoBehaviour
     private Body[] bodies;
 
     public GameObject objectToMove;
-    public float moveSpeed = 5f;
+    public float moveSpeed = 100f;
 
     private Vector3 initialPosition; 
 
