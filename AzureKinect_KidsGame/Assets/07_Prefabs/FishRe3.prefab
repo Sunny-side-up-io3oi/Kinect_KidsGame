@@ -30,10 +30,11 @@ Transform:
   m_GameObject: {fileID: 9014592918620869545}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 12.7, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6637590811089982457}
+  - {fileID: 7469091049968135670}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -106,8 +107,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.9624214, y: 1.172039, z: 0.87932277}
-  m_Center: {x: 0.18065453, y: -0.057399392, z: 0.060338557}
+  m_Size: {x: 1.8178928, y: 1.2750566, z: 1.3367612}
+  m_Center: {x: -0.08807056, y: 0.34304506, z: -0.16838011}
 --- !u!114 &1003268681389723242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,6 +152,90 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1001 &3954106744257523361
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2842786077709354090}
+    m_Modifications:
+    - target: {fileID: 5870518663397000023, guid: a3981720ce53a9247854e78f271a4656,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870518663397000023, guid: a3981720ce53a9247854e78f271a4656,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.479
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870518663397000023, guid: a3981720ce53a9247854e78f271a4656,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870518663397000023, guid: a3981720ce53a9247854e78f271a4656,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.854
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870518663397000023, guid: a3981720ce53a9247854e78f271a4656,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7759249
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870518663397000023, guid: a3981720ce53a9247854e78f271a4656,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.16539048
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870518663397000023, guid: a3981720ce53a9247854e78f271a4656,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.59538317
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870518663397000023, guid: a3981720ce53a9247854e78f271a4656,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.12690736
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870518663397000023, guid: a3981720ce53a9247854e78f271a4656,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -24.065
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870518663397000023, guid: a3981720ce53a9247854e78f271a4656,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870518663397000023, guid: a3981720ce53a9247854e78f271a4656,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5870518663397000023, guid: a3981720ce53a9247854e78f271a4656,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6499702730844805613, guid: a3981720ce53a9247854e78f271a4656,
+        type: 3}
+      propertyPath: m_Name
+      value: FlameAngelfish
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a3981720ce53a9247854e78f271a4656, type: 3}
+--- !u!4 &7469091049968135670 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5870518663397000023, guid: a3981720ce53a9247854e78f271a4656,
+    type: 3}
+  m_PrefabInstance: {fileID: 3954106744257523361}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7924720305938453383
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -218,6 +303,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ClownfishOrange
+      objectReference: {fileID: 0}
+    - target: {fileID: 4228007183261063876, guid: 4f747f7c93a20dd42abd2bab4eb08637,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
