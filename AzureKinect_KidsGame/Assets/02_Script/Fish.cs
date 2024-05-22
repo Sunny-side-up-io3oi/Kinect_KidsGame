@@ -23,15 +23,15 @@ public class Fish : MonoBehaviour
             {
                 int scoreToAdd = 0;
                 if (gameObject.CompareTag("FishA"))
-                    scoreToAdd = 20;
+                    scoreToAdd = 10;
                 else if (gameObject.CompareTag("FishB"))
-                    scoreToAdd = 50;
+                    scoreToAdd = 20;
                 else if (gameObject.CompareTag("FishC"))
-                    scoreToAdd = 100;
+                    scoreToAdd = 30;
                 else if (gameObject.CompareTag("FishD"))
-                    scoreToAdd = 200;
+                    scoreToAdd = 40;
                 else if (gameObject.CompareTag("FishE"))
-                    scoreToAdd = 300;
+                    scoreToAdd = 50;
 
                 gameManager.AddScore(scoreToAdd);
                 gameManager.PlayScoreSound();

@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ba8cb1b23941f418019c490eadbd9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 20
+  score: 2
   speed: 10
   scoreParticlePrefab: {fileID: 3223031359271505891, guid: 155410a7086d1d34ca48c448dfc33156,
     type: 3}
