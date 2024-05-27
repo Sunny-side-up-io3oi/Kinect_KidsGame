@@ -1,30 +1,35 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using System.Diagnostics;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public TextMeshProUGUI scoreText;
-    //public TextMeshProUGUI scoreLText;
-    public TextMeshProUGUI bestscoreText;
-    public int score { get; private set; }
-    //public int scoreL { get; private set; }
-    public int bestscore { get; private set; }
-    private bool isGameOver = false;
-    public TMP_Text timerTextR;
-    //public TMP_Text timerTextL;
+    [System.Serializable]
+    public class Player
+    {
+        public string playerName; // 플레이어 이름 속성 추가
+        public TextMeshProUGUI scoreText;
+        public TextMeshProUGUI bestscoreText;
+        public int score;
+        public int bestScore;
+    }
+
+    public Player[] players;
+
+    public TMP_Text timerText;
     public Slider timeSlider;
-    public GameObject bestScoreUI;
+    //public GameObject bestScoreUI1P;
+    //public GameObject bestScoreUI2P;
     public Button returnToMainButton;
-    //public AudioClip scoreClip; // 득점 사운드 클립
-    //private AudioSource audioSource;
+    public AudioSource scoreSound;
 
     private float totalTime = 91f;
     private float timer;
     private bool timerStopped = false;
+    private bool isGameOver = false;
 
     public bool IsGameOver { get { return isGameOver; } }
 
@@ -42,15 +47,15 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        UpdateScoreText();
         timer = totalTime;
         timeSlider.maxValue = totalTime;
-        bestScoreUI.SetActive(false);
+        //bestScoreUI1P.SetActive(false);
+        //bestScoreUI2P.SetActive(false);
         returnToMainButton.gameObject.SetActive(false);
-        //audioSource = GetComponent<AudioSource>(); // AudioSource 컴포넌트 가져오기
+        InitializePlayers();
     }
 
-    void Update()
+    private void Update()
     {
         if (timerStopped)
             return;
@@ -65,33 +70,67 @@ public class GameManager : MonoBehaviour
         {
             timer = 0;
             timerStopped = true;
-            EndGame(); // 타이머가 끝나면 게임 종료
+            EndGame();
         }
     }
 
-    void UpdateTimerUI()
+    private void InitializePlayers()
+    {
+        foreach (Player player in players)
+        {
+            player.score = 0;
+            player.bestScore = 0;
+            UpdatePlayerUI(player);
+        }
+    }
+
+    private void UpdateTimerUI()
     {
         int minutes = Mathf.FloorToInt(timer / 60);
         int seconds = Mathf.FloorToInt(timer % 60);
-
-        timerTextR.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-        //timerTextL.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    void UpdateSliderValue()
+    private void UpdateSliderValue()
     {
         timeSlider.value = totalTime - timer;
     }
 
-    public void AddScore(int value)
+    public void AddScore(string playerName, int value)
     {
         if (!isGameOver)
         {
-            score += value;
-            UpdateScoreText();
-            // 득점 사운드 재생
-            //audioSource.PlayOneShot(scoreClip);
+            Player player = FindPlayer(playerName);
+            if (player != null)
+            {
+                player.score += value;
+                if (player.score > player.bestScore)
+                {
+                    player.bestScore = player.score;
+                }
+
+                UpdatePlayerUI(player);
+                PlayScoreSound();
+            }
         }
+    }
+
+    private Player FindPlayer(string playerName)
+    {
+        foreach (Player player in players)
+        {
+            if (player.playerName == playerName)
+            {
+                return player;
+            }
+        }
+        return null;
+    }
+
+    private void UpdatePlayerUI(Player player)
+    {
+        player.scoreText.text = " " + player.score;
+        player.bestscoreText.text = "Best Score: " + player.bestScore;
     }
 
     public void EndGame()
@@ -99,21 +138,17 @@ public class GameManager : MonoBehaviour
         if (!isGameOver)
         {
             isGameOver = true;
-            Time.timeScale = 0; 
-            bestScoreUI.SetActive(true); 
+            Time.timeScale = 0;
+            foreach (Player player in players)
+            {
+                player.score = 0;
+                UpdatePlayerUI(player);
+            }
+            //bestScoreUI1P.SetActive(true);
+            //bestScoreUI2P.SetActive(true);
             returnToMainButton.gameObject.SetActive(true);
-            //Debug.Log("Game Over");
         }
     }
-
-    private void UpdateScoreText()
-    {
-        scoreText.text = " " + score.ToString();
-        //scoreLText.text = "Score: " + score.ToString();
-        bestscoreText.text = " " + score.ToString();
-    }
-
-    public AudioSource scoreSound;
 
     public void PlayScoreSound()
     {

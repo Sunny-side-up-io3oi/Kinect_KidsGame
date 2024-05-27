@@ -5,6 +5,7 @@ public class Fish : MonoBehaviour
     public int score;
     public float speed;
     public GameObject scoreParticlePrefab;
+    public GameObject playerPrefab; // 플레이어 프리팹
 
     private Rigidbody rb;
 
@@ -18,9 +19,13 @@ public class Fish : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            GameManager gameManager = FindObjectOfType<GameManager>();
+            GameManager gameManager = GameManager.Instance;
             if (gameManager != null)
             {
+                GameObject playerObject = collision.gameObject;
+                // 플레이어 프리팹 이름을 가져옴
+                string playerName = playerObject.name; // 플레이어 오브젝트의 이름을 가져옴
+
                 int scoreToAdd = 0;
                 if (gameObject.CompareTag("FishA"))
                     scoreToAdd = 10;
@@ -33,7 +38,7 @@ public class Fish : MonoBehaviour
                 else if (gameObject.CompareTag("FishE"))
                     scoreToAdd = 50;
 
-                gameManager.AddScore(scoreToAdd);
+                gameManager.AddScore(playerName, scoreToAdd);
                 gameManager.PlayScoreSound();
 
                 if (scoreParticlePrefab != null)
