@@ -12,10 +12,9 @@ public class KinectTracking : MonoBehaviour
     public float moveSpeed = 100f;
 
     // 플레이어를 추적하는 Dictionary
-    private Dictionary<ulong, int> playerIndices = new Dictionary<ulong, int>(); // 플레이어 ID와 인덱스를 매핑하는 Dictionary
-    private List<GameObject> players = new List<GameObject>(); // 플레이어 오브젝트 리스트
-    private List<ulong> trackedIds = new List<ulong>(); // 추적된 플레이어 ID 리스트 (재사용)
+    private Dictionary<ulong, GameObject> trackedPlayers = new Dictionary<ulong, GameObject>(); // 플레이어 ID와 오브젝트를 매핑하는 Dictionary
     private List<ulong> lostIds = new List<ulong>(); // 추적되지 않는 플레이어 ID 리스트 (재사용)
+    private int prefabIndex = 0; // 현재 사용할 플레이어 프리팹 인덱스
 
     void Start()
     {
@@ -57,62 +56,82 @@ public class KinectTracking : MonoBehaviour
 
     private void UpdateTrackedPlayers()
     {
-        trackedIds.Clear(); // 추적된 ID 리스트를 초기화
+        lostIds.Clear(); // 추적되지 않는 ID 리스트를 초기화
 
         foreach (var body in bodies)
         {
             if (body.IsTracked)
             {
-                trackedIds.Add(body.TrackingId); // 추적된 ID 리스트에 추가
-                if (!playerIndices.ContainsKey(body.TrackingId))
+                if (!trackedPlayers.ContainsKey(body.TrackingId))
                 {
                     // 새로운 플레이어를 생성
-                    int prefabIndex = Random.Range(0, playerPrefabs.Count); // 랜덤하게 플레이어 프리팹을 선택
-                    GameObject player = Instantiate(playerPrefabs[prefabIndex]);
-                    playerIndices.Add(body.TrackingId, players.Count);
-                    players.Add(player);
+                    GameObject player = Instantiate(playerPrefabs[prefabIndex], GetInitialPosition(prefabIndex), Quaternion.identity); // 초기 위치와 회전값을 지정하여 생성
+                    trackedPlayers.Add(body.TrackingId, player);
+
+                    prefabIndex = (prefabIndex + 1) % playerPrefabs.Count; // 다음 플레이어 프리팹 인덱스 계산
                 }
                 else
                 {
                     // 플레이어가 이미 존재하면 활성화
-                    players[playerIndices[body.TrackingId]].SetActive(true);
+                    trackedPlayers[body.TrackingId].SetActive(true);
                 }
-                UpdatePlayerPosition(body); // 플레이어 위치 업데이트
+                UpdatePlayerPosition(body, trackedPlayers[body.TrackingId]); // 플레이어 위치 업데이트
             }
         }
     }
 
     private void RemoveLostPlayers()
     {
-        lostIds.Clear(); // 추적되지 않는 ID 리스트를 초기화
-
-        foreach (ulong id in playerIndices.Keys)
+        foreach (var id in trackedPlayers.Keys)
         {
-            if (!trackedIds.Contains(id))
+            if (!IsTrackedId(id))
             {
-                lostIds.Add(id); // 추적되지 않는 ID 리스트에 추가
+                // 추적되지 않는 플레이어 오브젝트 비활성화
+                trackedPlayers[id].SetActive(false);
+                lostIds.Add(id);
             }
         }
 
-        foreach (ulong id in lostIds)
+        foreach (var id in lostIds)
         {
-            // 추적되지 않는 플레이어 오브젝트 비활성화
-            players[playerIndices[id]].SetActive(false);
+            trackedPlayers.Remove(id); // 추적되지 않는 플레이어 제거
         }
     }
 
-    private void UpdatePlayerPosition(Body body)
+    private bool IsTrackedId(ulong id)
+    {
+        foreach (var body in bodies)
+        {
+            if (body.IsTracked && body.TrackingId == id)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Vector3 GetInitialPosition(int prefabIndex)
+    {
+        // 각 플레이어 프리팹별로 초기 위치를 지정
+        switch (prefabIndex)
+        {
+            case 0: // 첫 번째 플레이어 프리팹
+                return new Vector3(-36.8f, -2.46f, 0f);
+            case 1: // 두 번째 플레이어 프리팹
+                return new Vector3(30.8f, -2.46f, 0f);
+            // 필요에 따라 추가적인 플레이어 프리팹에 대한 초기 위치 지정
+            default:
+                return Vector3.zero;
+        }
+    }
+
+    private void UpdatePlayerPosition(Body body, GameObject player)
     {
         var spineBasePosition = body.Joints[JointType.SpineBase].Position;
         var unitySpineBasePosition = new Vector3(spineBasePosition.X, spineBasePosition.Y, -spineBasePosition.Z);
 
         // Kinect 데이터를 기반으로 새로운 위치 계산
-        int playerIndex = playerIndices[body.TrackingId];
-        GameObject player = players[playerIndex];
-        Vector3 initialPosition = player.transform.position; // 플레이어의 초기 위치 가져오기
-
-        // 좌표를 초기 위치에서 좌우로만 이동하도록 업데이트
-        var newPosition = new Vector3(unitySpineBasePosition.x * moveSpeed, initialPosition.y, initialPosition.z);
+        var newPosition = new Vector3(unitySpineBasePosition.x * moveSpeed, player.transform.position.y, player.transform.position.z);
 
         // 플레이어 위치 업데이트
         player.transform.position = newPosition;

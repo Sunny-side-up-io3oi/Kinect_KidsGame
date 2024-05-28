@@ -20,6 +20,12 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene("Start");
     }
 
+    public void TwoPlayerSceneChange()
+    {
+        PlayButtonClickSound();
+        SceneManager.LoadScene("MainScene_2P");
+    }
+
     private void PlayButtonClickSound()
     {
         if (buttonClickSound != null && audioSource != null)

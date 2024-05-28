@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using System.Collections.Generic;
+using System.Diagnostics;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,9 +10,9 @@ public class GameManager : MonoBehaviour
     [System.Serializable]
     public class Player
     {
-        public string playerName; // 플레이어 이름 속성 추가
+        public string playerName; // 플레이어 이름 속성
         public TextMeshProUGUI scoreText;
-        public TextMeshProUGUI bestscoreText;
+        public TextMeshProUGUI bestScoreText;
         public int score;
         public int bestScore;
     }
@@ -21,12 +21,11 @@ public class GameManager : MonoBehaviour
 
     public TMP_Text timerText;
     public Slider timeSlider;
-    //public GameObject bestScoreUI1P;
-    //public GameObject bestScoreUI2P;
     public Button returnToMainButton;
     public AudioSource scoreSound;
+    public GameObject TimeoverUIPrefab;
 
-    private float totalTime = 91f;
+    private float totalTime = 31f;
     private float timer;
     private bool timerStopped = false;
     private bool isGameOver = false;
@@ -49,8 +48,6 @@ public class GameManager : MonoBehaviour
     {
         timer = totalTime;
         timeSlider.maxValue = totalTime;
-        //bestScoreUI1P.SetActive(false);
-        //bestScoreUI2P.SetActive(false);
         returnToMainButton.gameObject.SetActive(false);
         InitializePlayers();
     }
@@ -109,17 +106,26 @@ public class GameManager : MonoBehaviour
                     player.bestScore = player.score;
                 }
 
+                UnityEngine.Debug.Log($"Player {playerName} scored. New Score: {player.score}, Best Score: {player.bestScore}");
+
                 UpdatePlayerUI(player);
                 PlayScoreSound();
+            }
+            else
+            {
+                UnityEngine.Debug.LogWarning($"Player {playerName} not found.");
             }
         }
     }
 
     private Player FindPlayer(string playerName)
     {
+        // (Clone)을 제거한 이름으로 비교
+        string cleanedPlayerName = playerName.Replace("(Clone)", "").Trim();
+
         foreach (Player player in players)
         {
-            if (player.playerName == playerName)
+            if (player.playerName == cleanedPlayerName)
             {
                 return player;
             }
@@ -130,7 +136,7 @@ public class GameManager : MonoBehaviour
     private void UpdatePlayerUI(Player player)
     {
         player.scoreText.text = " " + player.score;
-        player.bestscoreText.text = "Best Score: " + player.bestScore;
+        player.bestScoreText.text = " " + player.bestScore;
     }
 
     public void EndGame()
@@ -141,14 +147,14 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
             foreach (Player player in players)
             {
-                player.score = 0;
                 UpdatePlayerUI(player);
             }
-            //bestScoreUI1P.SetActive(true);
-            //bestScoreUI2P.SetActive(true);
+            // Timeover UI 활성화
             returnToMainButton.gameObject.SetActive(true);
+            TimeoverUIPrefab.gameObject.SetActive(true);
         }
     }
+
 
     public void PlayScoreSound()
     {

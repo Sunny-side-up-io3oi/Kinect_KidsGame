@@ -5,7 +5,6 @@ public class Fish : MonoBehaviour
     public int score;
     public float speed;
     public GameObject scoreParticlePrefab;
-    public GameObject playerPrefab; // 플레이어 프리팹
 
     private Rigidbody rb;
 
@@ -23,8 +22,7 @@ public class Fish : MonoBehaviour
             if (gameManager != null)
             {
                 GameObject playerObject = collision.gameObject;
-                // 플레이어 프리팹 이름을 가져옴
-                string playerName = playerObject.name; // 플레이어 오브젝트의 이름을 가져옴
+                string playerName = playerObject.name.Replace("(Clone)", "").Trim(); // 플레이어 오브젝트의 이름을 가져옴
 
                 int scoreToAdd = 0;
                 if (gameObject.CompareTag("FishA"))
